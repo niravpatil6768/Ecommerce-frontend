@@ -17,11 +17,11 @@ import { Token } from '@angular/compiler';
 export class LoginComponent implements OnInit {
   password: string = '';
   showPassword: boolean = false;
-  
+
 
 
   isLoggedIn = false;
-  
+
   errMessage: string = '';
   form: FormGroup = new FormGroup({
     email: new FormControl(''),
@@ -65,17 +65,18 @@ export class LoginComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
-    
+
 
     const { email, pass } = this.form.value;
     this.webService.login(email, pass).subscribe(
       {
         next: (data) => {
-          const token = this.storageService.getToken();
-          console.log(token);
+          console.log('data.token: ', data.token);
           console.log(this.storageService.setToken(data.token));
+          const token = this.storageService.getToken();
+          console.log('token : ', token);
           //console.log('email'+data.email);
-          console.log("token"+data.token);
+          
          // this.storageService.setRole(JSON.parse(atob(data.token.split('.')[1])).type);
          // console.log(data.userId);
           //this.setSession(userId,res.headers.get('x-access-token') ?? '', res.headers.get('x-refresh-token') ?? '');
@@ -83,8 +84,8 @@ export class LoginComponent implements OnInit {
          // console.log(data.user_id);
          // this.router.navigate(['dashboard/course']);
           this.isLoggedIn = true;
-         
-         
+
+
          /* const Toast = Swal.mixin({
             toast: true,
             position: 'top-end',
@@ -103,12 +104,12 @@ export class LoginComponent implements OnInit {
           })*/
 
           this.router.navigate(['dashboard/product']);
-         
+
         },
         error: (err) => {
           this.errorMessage = err.error.message;
           this.errMessage = 'Email or password not found';
-         
+
         }
       }
     );
@@ -118,10 +119,10 @@ export class LoginComponent implements OnInit {
     this.submitted = false;
     this.form.reset();
   }
-  
+
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
-  }  
+  }
 
   /*old*onLoginButtonClicked(email: string, password: string){
     this.authService.login(email, password).subscribe((res: HttpResponse<any>) => {
