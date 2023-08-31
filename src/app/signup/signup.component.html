@@ -1,0 +1,158 @@
+
+<!--<div class=" centered-content">
+
+
+    <div class="loginform" class="login-box">
+  
+      <div class="panel">
+        <h1 style="text-align: center; font-weight:bolder; font-size:x-large; color: #0095ff; ">Login</h1>
+        <hr>
+        <p class="text-success" style="font-weight: bold;">Please enter your Email & Password</p>
+      </div>
+  
+      <div>
+        <div class="form-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text" style="font-size: 25px; margin-right: 5px; color: #5eba7d;">
+              <i class="fa fa-lock"></i>
+            </span>
+            <input type="email" #emailInput id="email" name="email" class="form-control" placeholder="Enter the Email"
+              required>
+          </div>
+          
+  
+        </div>
+  
+  
+        <div class="form-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text" style="font-size: 25px; margin-right: 5px;color: #0095ff;">
+              <i class="fa fa-lock"></i>
+            </span>
+            <input type="password" #pwInput id="password" name="password" class="form-control"
+              placeholder="Enter the Password" required>
+          </div>
+         
+        </div>
+  
+        
+  
+  
+        <br>
+        <button class="btn btn-outline-success" (click)="onSignupButtonClicked(emailInput.value,pwInput.value)"
+          style="width: 100%;">Login</button>
+  
+        
+  
+      </div>
+  
+      
+  
+  
+  
+      <br>
+  
+  
+    </div>
+  
+  
+  </div>-->
+
+  <div class="body">
+    <!--<div class="text-center">
+      <img class="img-fluid" src="assets\Logo.png" alt="Image not found">
+    </div>-->
+    
+      <div class="Container">
+        <h1 class="title text-center">Create New Account</h1>
+        <!-- Form Tag -->
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          <!--<div class="form-group mb-3">
+            <label>First Name:</label>
+            <input type="email" formControlName="firstname" class="form-control" placeholder="Enter your first name"
+            [ngClass]="{ 'is-invalid': submitted && formControl['firstname'].errors }">
+            <div *ngIf="submitted && formControl['firstname'].errors" class="invalid-feedback" style="color: #dd2e2e">
+              <div *ngIf="formControl['firstname'].errors['required']">Firstname is required</div>
+            </div>
+          </div>
+    
+          <div class="form-group mb-3">
+            <label >Last Name:</label>
+            <input type="email" formControlName="lastname" class="form-control" placeholder="Enter your last name">
+          </div>-->
+    
+          <div class="form-group mb-3">
+            <label>Email address:</label>
+            <input type="email" formControlName="email" class="form-control"  placeholder="Enter your email"
+            [ngClass]="{ 'is-invalid': submitted && formControl['email'].errors }">
+            <div *ngIf="submitted && formControl['email'].errors" class="invalid-feedback" style="color: #dd2e2e">
+              <div *ngIf="formControl['email'].errors['required']">Email is required</div>
+              <div *ngIf="formControl['email'].errors['email']">Email is invalid</div>
+            </div>
+          </div>
+    
+          <div class="form-group mb-3">
+            <label>Password:</label>
+            <div class="password-input-container">
+              <input [type]="showPassword ? 'text' : 'password'" formControlName="password" id="password"
+                class="form-control" [(ngModel)]="password" name="password" required placeholder="Enter your password"
+                [ngClass]="{ 'is-invalid': submitted && formControl['password'].errors }">
+              <span class="password-toggle" (click)="togglePasswordVisibility()">
+                <i class="fa" [ngClass]="{ 'fa-eye': !showPassword, 'fa-eye-slash': showPassword }"></i>
+              </span>
+            </div>
+            <div *ngIf="submitted && formControl['password'].errors" class="invalid-feedback" style="color: #dd2e2e">
+              <div *ngIf="formControl['password'].errors['required']">Password is required</div>
+              <div *ngIf="formControl['password'].errors['minlength']">
+                Password must be at least 8 characters
+              </div>
+              <div *ngIf="formControl['password'].errors['maxlength']">
+                Username must not exceed 40 characters
+              </div>
+            </div>
+          </div>
+          <div class="form-group mb-3">
+            <label>Confirm Password:</label>
+            <div class="password-input-container">
+              <input [type]="showPasswordtwo ? 'text' : 'password'" formControlName="confirmPassword" required
+                placeholder="Re-enter your password" id="confirmPassword" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && formControl['confirmPassword'].errors }"
+                [(ngModel)]="confirmPassword" name="">
+              <span class="password-toggle" (click)="togglePasswordVisibilitytwo()">
+                <i class="fa" [ngClass]="{ 'fa-eye': !showPasswordtwo, 'fa-eye-slash': showPasswordtwo }"></i>
+              </span>
+              <div *ngIf="submitted && formControl['confirmPassword'].errors" class="invalid-feedback"
+                style="color:#dd2e2e">
+                <div *ngIf="formControl['confirmPassword'].errors['required']">
+                  Confirm Password is required
+                </div>
+                <div *ngIf="formControl['confirmPassword'].errors['matching']">
+                  Confirm Password does not match
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-check">
+            <input type="checkbox" formControlName="acceptTerms" class="form-check-input"
+            [ngClass]="{ 'is-invalid': submitted && formControl['acceptTerms'].errors }">
+            <label class="form-check-label text-justify">I have read and agree to the terms</label>
+            <div *ngIf="submitted && formControl['acceptTerms'].errors" class="invalid-feedback" style="color: #dd2e2e">
+              Accept Terms is required
+            </div>
+          </div>
+    
+          <div class="text-center form-group btn-group">
+            <button type="submit" class="btn submitButton">Sign up</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <ngx-ui-loader fgsType="ball-spin-clockwise-fade-rotating" fgsColor="#2196f3"></ngx-ui-loader>
+            <button type="button" class="btn btn-warning" (click)="onReset()">Reset</button>
+          </div>
+        </form>
+        
+    
+        <div class="loginLink">
+          <h6>Already have an account?</h6>
+          <h6 class="p-1 link"><a href="/login">  Login here</a></h6>
+        </div>
+      </div>
+    </div>
