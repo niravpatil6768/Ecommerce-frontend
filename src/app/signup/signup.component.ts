@@ -41,6 +41,7 @@ export class SignupComponent implements OnInit {
             Validators.maxLength(40)
           ]
         ],
+        role: ['', Validators.required],
         confirmPassword: ['', Validators.required],
         acceptTerms: [false, Validators.requiredTrue]
       },
@@ -61,10 +62,10 @@ export class SignupComponent implements OnInit {
       return;
     }
 
-    const {  email, password } = this.form.value;
+    const {  email, password, role } = this.form.value;
 
 
-    this.webService.signup( email, password).subscribe(
+    this.webService.signup( email, password, role).subscribe(
       {
         next: (data) => {
           this.router.navigate(['login']);

@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
+import { StorageService } from 'src/app/storage.service';
+
 
 @Component({
   selector: 'app-nav',
@@ -7,9 +11,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavComponent implements OnInit {
 
-  constructor() { }
+  constructor(private storageService:StorageService,private router:Router) { }
 
   ngOnInit(): void {
+  }
+
+  public getRole(){
+    return this.storageService.getRole();
+  }
+  public isLoggedIn(){
+    return this.storageService.isLoggedIn();
+    
+  }
+
+  public logout(){
+    this.storageService.clear();
+    console.log("clear")
   }
 
 }

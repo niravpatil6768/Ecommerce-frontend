@@ -34,7 +34,7 @@ export class ProductListComponent implements OnInit {
   url: any = []
   ngOnInit(): void {
     this.token = this.storageService.getToken();
-    //this.userId = JSON.parse(atob(this.token.split('.')[1]))._id
+    this.userId = JSON.parse(atob(this.token.split('.')[1]))._id
     this.webService.products().subscribe({
       next: (data: any) => {
         this.products = data.products;

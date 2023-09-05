@@ -19,7 +19,7 @@ export class AddProductComponent implements OnInit {
     description: new FormControl('')
   })
   submitted = false;
-  courseId = 0;
+  productId = 0;
   url = '';
   file: any;
   isLoading = false;
@@ -33,7 +33,7 @@ export class AddProductComponent implements OnInit {
         sellername: ['', [Validators.required]],
         price: ['', [Validators.required]],
         description: ['', [Validators.required]],
-        //thumbnail: ['', [Validators.required]]
+        thumbnail: ['', [Validators.required]]
       }
     )
   }
@@ -71,6 +71,20 @@ export class AddProductComponent implements OnInit {
       return;
     }
     this.router.navigate(['dashboard/product']);
+  }
+
+  processImage(event: any) {
+    let files: FileList = event.target.files;
+    const { name, sellername, price, description } = this.productForm.value;
+    this.file = files[0];
+    this.isLoading = true;
+    this.http.post(environment.API + '/product/getUploadURL/' + this.file.name, { name, thumbnail: this.file.name, sellername, price, description }).subscribe((res: any) => {
+      this.url = res.url;
+      this.productId = res.product._id
+      this.isLoading = false;
+    }, (error) => {
+      this.isLoading = false;
+    })
   }
 
 }

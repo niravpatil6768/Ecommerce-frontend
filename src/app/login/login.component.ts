@@ -71,38 +71,20 @@ export class LoginComponent implements OnInit {
     this.webService.login(email, pass).subscribe(
       {
         next: (data) => {
-          console.log('data.token: ', data.token);
-          console.log(this.storageService.setToken(data.token));
+          console.log('data.token: ', data.body.token);
+          console.log('data.token: ', data.message);
+          console.log('data: ', data);
+          console.log(this.storageService.setToken(data.body.token));
+          this.storageService.setRole(JSON.parse(atob(data.body.token.split('.')[1])).type);
           const token = this.storageService.getToken();
+          const role = this.storageService.getRole();
+          console.log("role", role);
           console.log('token : ', token);
-          //console.log('email'+data.email);
           
-         // this.storageService.setRole(JSON.parse(atob(data.token.split('.')[1])).type);
-         // console.log(data.userId);
-          //this.setSession(userId,res.headers.get('x-access-token') ?? '', res.headers.get('x-refresh-token') ?? '');
-         // this.storageService.setUserId(data.user_id);
-         // console.log(data.user_id);
-         // this.router.navigate(['dashboard/course']);
           this.isLoggedIn = true;
 
 
-         /* const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 2000,
-            timerProgressBar: true,
-            customClass: 'swal-wide',
-            didOpen: (toast) => {
-              toast.addEventListener('mouseenter', Swal.stopTimer)
-              toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-          })
-          Toast.fire({
-            icon: 'success',
-            title: 'Signed in successfully'
-          })*/
-
+       
           this.router.navigate(['dashboard/product']);
 
         },

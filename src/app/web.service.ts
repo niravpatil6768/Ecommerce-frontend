@@ -12,10 +12,11 @@ export class WebService {
     this.ROOT_URL = environment.API;
    }
 
-   signup(email: string,password: string): Observable<any>{
+   signup(email: string,password: string,type: string): Observable<any>{
     return this.http.post(`${this.ROOT_URL}/user/register`,{
       email,
-      password
+      password,
+      type
     },{observe: 'response'});
    }
 
@@ -47,5 +48,15 @@ export class WebService {
 
   public removeItem(productId:any,userId:any){
     return this.http.delete(`${this.ROOT_URL}/cart/${userId}/${productId}`);
+  }
+
+  //getUser
+  getUsers(){
+    return this.http.get(`${this.ROOT_URL}/user/`);
+  }
+
+  deleteUser(userId: any)
+  {
+    return this.http.delete(`${this.ROOT_URL}/user/deleteUser/${userId}`);
   }
 }

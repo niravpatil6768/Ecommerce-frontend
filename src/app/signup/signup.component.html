@@ -59,27 +59,13 @@
   </div>-->
 
   <div class="body">
-    <!--<div class="text-center">
-      <img class="img-fluid" src="assets\Logo.png" alt="Image not found">
-    </div>-->
+    
     
       <div class="Container">
-        <h1 class="title text-center">Create New Account</h1>
+        <h1 class="title text-center">Create Account</h1>
         <!-- Form Tag -->
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
-          <!--<div class="form-group mb-3">
-            <label>First Name:</label>
-            <input type="email" formControlName="firstname" class="form-control" placeholder="Enter your first name"
-            [ngClass]="{ 'is-invalid': submitted && formControl['firstname'].errors }">
-            <div *ngIf="submitted && formControl['firstname'].errors" class="invalid-feedback" style="color: #dd2e2e">
-              <div *ngIf="formControl['firstname'].errors['required']">Firstname is required</div>
-            </div>
-          </div>
-    
-          <div class="form-group mb-3">
-            <label >Last Name:</label>
-            <input type="email" formControlName="lastname" class="form-control" placeholder="Enter your last name">
-          </div>-->
+          
     
           <div class="form-group mb-3">
             <label>Email address:</label>
@@ -111,6 +97,7 @@
               </div>
             </div>
           </div>
+
           <div class="form-group mb-3">
             <label>Confirm Password:</label>
             <div class="password-input-container">
@@ -132,6 +119,18 @@
               </div>
             </div>
           </div>
+
+          <div class="form-group mb-3">
+            <label>Select Type Of User:</label>
+            <select formControlName="role" class="form-control" [ngClass]="{ 'is-invalid': submitted && formControl['role'].errors }">
+              <option value="">Select Role</option>
+              <option>SELLER</option>
+              <option>BUYER</option>
+            </select>
+            <div *ngIf="submitted && formControl['role'].errors" class="invalid-feedback">
+              <div *ngIf="formControl['role'].errors['required']">Role is required</div>
+            </div>
+          </div>
           
           <div class="form-check">
             <input type="checkbox" formControlName="acceptTerms" class="form-check-input"
@@ -143,9 +142,9 @@
           </div>
     
           <div class="text-center form-group btn-group">
-            <button type="submit" class="btn submitButton">Sign up</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button type="submit" class="btn btn-success">Sign up</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <ngx-ui-loader fgsType="ball-spin-clockwise-fade-rotating" fgsColor="#2196f3"></ngx-ui-loader>
-            <button type="button" class="btn btn-warning" (click)="onReset()">Reset</button>
+            <button type="button" class="btn btn-secondary" (click)="onReset()">Reset</button>
           </div>
         </form>
         

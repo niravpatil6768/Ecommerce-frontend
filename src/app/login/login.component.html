@@ -67,7 +67,7 @@
     </div>-->
     
       <div class="Container">
-        <h1 class="title text-center">Login to your Account</h1>
+        <h1 class="title text-center">Login Page</h1>
   
         <!-- Form Tag -->
         <form [formGroup]="form" (ngSubmit)="signIn()">
@@ -107,9 +107,9 @@
   
   
           <div class="text-center form-group btn-group">
-              <button type="submit" class="btn submitButton">Login</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <button type="submit" class="btn btn-success">Login</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <ngx-ui-loader fgsType="ball-spin-clockwise-fade-rotating" fgsColor="#2196f3"></ngx-ui-loader>
-              <button type="button" class="btn btn-warning" (click)="onReset()">Reset</button>
+              <button type="button" class="btn btn-secondary" (click)="onReset()">Reset</button>
             </div>
         </form>
        

@@ -4,6 +4,7 @@ import { ProductComponent } from './product.component';
 import { AddProductComponent} from './seller/add-product/add-product.component';
 import { ProductListComponent } from './seller/product-list/product-list.component';
 import { CartComponent } from './buyer/cart/cart.component';
+import { AuthGuard } from 'src/app/guards/auth.guard';
 
 const routes: Routes = [
     {
@@ -12,7 +13,7 @@ const routes: Routes = [
         children: [
             {path:"add", component: AddProductComponent},
             {path:"",component:ProductListComponent},
-            {path:"cart",component:CartComponent},
+            {path:"cart",component:CartComponent,canActivate:[AuthGuard]},
         ]
     }
 ];

@@ -41,14 +41,14 @@
           </div>
         </div>
   
-        <!--<div class="form-group">
+        <div class="form-group">
           <label>Thumbnail</label>
-          <input type="file" class="form-control" formControlName="thumbnail" 
+          <input type="file" class="form-control" formControlName="thumbnail" (change)="processImage($event)"
             [ngClass]="{ 'is-invalid': submitted && formControls['thumbnail'].errors }">
           <div *ngIf="submitted && formControls['thumbnail'].errors" class="invalid-feedback">
             <div *ngIf="formControls['thumbnail'].errors['required']">Thumbnail is required</div>
           </div>
-        </div>-->
+        </div>
   
         <div class="form-group text-center">
           <button type="submit" class="btn btn-primary"  (click)="addProduct()">Add</button>

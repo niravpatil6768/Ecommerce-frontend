@@ -20,7 +20,7 @@
               <div>
                 <h5 class="card-title">{{ product.productId.name }}</h5>
                 <p class="card-text">{{ product.productId.category }}</p>
-                <button (click)="removeItem(product.productId._id)" class="btn btn-outline-danger btn-sm">Remove</button>
+                <button (click)="removeItem(product.productId._id)" style="margin-top: 50px; margin-left: 350px; margin-right: -20px; margin-bottom: -10px;" class="btn btn-outline-danger btn-sm"><i style="font-size: 25px;" class="fa fa-trash"></i></button>
               </div>
               <div class="ms-auto">
                 <p class="mb-0">Price</p>
@@ -55,6 +55,7 @@
 </div>
 
 <div class="form-group text-center">
-  <button id ="paynow" type="submit" class="btn btn-primary" routerLink="/dashboard/course">Back</button>
+  <button id ="paynow" type="submit" class="btn btn-primary" routerLink="/dashboard/product">Add Products</button>
+  
 </div>
 
