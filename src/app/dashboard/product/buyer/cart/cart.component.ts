@@ -40,6 +40,8 @@ export class CartComponent implements OnInit {
   public getProducts() {
     this.webService.getCart(this.userId).subscribe({next: (data:any) => {
           this.products = data.cart.products;
+
+        console.log(data);
           this.products = this.products.map((product:any) => {
             /*if (course.courseId.thumbnail) {
               this.webService.getThumbnail(course.courseId._id, course.courseId.thumbnail).subscribe({

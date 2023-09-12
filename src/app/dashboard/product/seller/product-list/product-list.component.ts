@@ -32,49 +32,60 @@ export class ProductListComponent implements OnInit {
   constructor(private webService: WebService, private router: Router, private storageService: StorageService) { }
   product: any = []
   url: any = []
+  selectedCategory: string = '';
+  categories: string[] = ['SPORTS', 'ELECTRONICS', 'FASHION'];
   ngOnInit(): void {
     this.token = this.storageService.getToken();
     this.userId = JSON.parse(atob(this.token.split('.')[1]))._id
-    this.webService.products().subscribe({
+
+    /*this.webService.products().subscribe({
       next: (data: any) => {
+        console.log(data.products);
         this.products = data.products;
         this.allProducts = data.products;
         this.products = this.products.map((product: any) => {
           return product;
-          console.log(product);
-          console.log("products");
-          /* if (course.thumbnail) {
-            
-             this.courseService.getThumbnail(course._id, course.thumbnail).subscribe({
-               next: (data1) => {
-                 course.url = data1;
-               },
-               error(err) {
-               },
-             });
-           }
-           return course;
-         });
-       },
-       error(err) {
-       }*/
+          
         });
 
 
 
-        /*this._user.getUser(this.userId).subscribe({
-          next: (data: any) => {
-            this.CurrentUser = data
-            this.course = this.CurrentUser.user.courses;
-    
-          },
-          error: (err) => {
-    
-          },
-        })*/
+        
       }
 
-    })
+    })*/
+
+    this.getAllProducts();
+  }
+
+  getAllProducts() {
+    this.webService.products().subscribe((data: any) => {
+      this.products = data.products;
+      this.allProducts = data.products;
+    });
+  }
+
+ /* filterProductsByCategory(category: string) {
+    this.selectedCategory = category; // Update the selected category
+    if (category === '') {
+      // If no category is selected, display all products
+      this.products = this.allProducts;
+    } else {
+      // Filter products by the selected category
+      this.webService.productcategory(category).subscribe((data: any) => {
+        this.products = data.products;
+      });
+    }
+  }*/
+
+  filterProductsByCategory() {
+    if (this.selectedCategory === '') {
+      this.products = this.allProducts;
+    } else {
+      this.webService.productcategory(this.selectedCategory).subscribe((data: any) => {
+        this.products = data.products;
+      });
+    }
   }
 
 
@@ -101,9 +112,9 @@ export class ProductListComponent implements OnInit {
   onSearch() {
     if (this.searchQuery) {
       this.shouldFilter = true;
-      this.filteredProducts = this.allProducts.filter((product: any) =>
+      this.filteredProducts = this.products.filter((product: any) =>
         product.name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-        product.sellername.toLowerCase().includes(this.searchQuery.toLowerCase())
+        product.category.toLowerCase().includes(this.searchQuery.toLowerCase())
       );
       this.products = this.filteredProducts;
     } else {

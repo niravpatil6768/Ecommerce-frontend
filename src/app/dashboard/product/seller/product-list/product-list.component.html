@@ -11,32 +11,37 @@
       <button id="add-button" type="button" class="btn btn-primary" *ngIf="getRole()=='SELLER'"
         [routerLink]="['add']">Add new product</button>
     </div>
+
+    <div class="container class">
+      <div class="row">
+        <div class="col-md-6 offset-md-3">
+          <label for="categorySelect">Select a Category:</label>
+          <select id="categorySelect" class="form-control" [(ngModel)]="selectedCategory" (change)="filterProductsByCategory()">
+            <option *ngFor="">All</option>
+            <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+          </select>
+        </div>
+      </div>
+    </div>
     <div class="container2">
       <div class="row hidden-md-up">
         <div *ngIf="products.length === 0">No products found.</div>
         <div class="col-md-4" *ngFor="let product of products; let i = index">
           <div class="card shadow p-3 mb-5 bg-white rounded">
             <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-              <img src="{{product['url']}}" class="img-fluid" />
-              <a href="#!">
-                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-              </a>
+            
             </div>
             <div class="card-body">
-              <img [src]="product.productImage" alt="Item Image" />
+              <div class="container con1">
+              <img [src]="'http://localhost:3000/'+product.productImage " class="img" alt="Item Image" />
+              </div>
               <h5 class="card-title">{{product['name']}}</h5>
               <p class="card-text">Sellername : {{product['sellername']}}</p>
               <p class="card-text"> Rs. {{product['price']}}</p>
               <button  class="btn btn-outline-success"
               (click)="addToCart(product['_id'])">Add to Cart</button>
             </div>
-            <!--<ng-template #template>
-              <div class="modal-body text-center">
-                <p>Are you sure you want to delete this course ?</p>
-                <button type="button" class="btn btn-default" (click)="deleteCourse(course['_id'])">Yes</button>
-                <button type="button" class="btn btn-primary" (click)="cancel()">No</button>
-              </div>
-            </ng-template>-->
+           
           </div>
         </div>
       </div>

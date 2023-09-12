@@ -28,13 +28,22 @@ export class WebService {
    }
 
     //add product
-  public addProduct(name:string,sellername:string,price:number,description:string){
-    return this.http.post(`${this.ROOT_URL}/productpage/addproduct`,{name,sellername,price,description});
+  /*public addProduct(name:string,sellername:string,price:number,description:string,productImage:string){
+    
+    return this.http.post(`${this.ROOT_URL}/productpage/addproduct`,{name,sellername,price,description,productImage});
+  }*/
+
+  public addProduct(formData: FormData): Observable<any> {
+    return this.http.post(`${this.ROOT_URL}/productpage/addproduct`, formData);
   }
 
   //display products
   public products(){
     return this.http.get(`${this.ROOT_URL}/productpage`)
+  }
+
+  public productcategory(category: any){
+    return this.http.get(`${this.ROOT_URL}/productpage/${category}`)
   }
 
   //cart

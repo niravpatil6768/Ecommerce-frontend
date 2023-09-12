@@ -1,6 +1,6 @@
-<p>add-product works!</p>
 
-<div class="add-course-container">
+
+<!--<div class="add-course-container">
     <h2>Add new Product</h2>
     <div class="course-form">
       <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
@@ -43,10 +43,10 @@
   
         <div class="form-group">
           <label>Thumbnail</label>
-          <input type="file" class="form-control" formControlName="thumbnail" (change)="processImage($event)"
-            [ngClass]="{ 'is-invalid': submitted && formControls['thumbnail'].errors }">
-          <div *ngIf="submitted && formControls['thumbnail'].errors" class="invalid-feedback">
-            <div *ngIf="formControls['thumbnail'].errors['required']">Thumbnail is required</div>
+          <input type="file" class="form-control" formControlName="productImage" (change)="processImage($event)"
+            [ngClass]="{ 'is-invalid': submitted && formControls['productImage'].errors }">
+          <div *ngIf="submitted && formControls['productImage'].errors" class="invalid-feedback">
+            <div *ngIf="formControls['productImage'].errors['required']">Thumbnail is required</div>
           </div>
         </div>
   
@@ -57,4 +57,64 @@
   
       </form>
     </div>
-  </div>
+  </div>-->
+
+  <div class="add-course-container">
+    <h2>Add new Product</h2>
+    <div class="course-form">
+  <form (ngSubmit)="addProduct()"  enctype="multipart/form-data">
+
+
+    <div class="form-group">
+      <label for="name">Product Name:</label>
+      <input type="text"  placeholder="Product name"  class="form-control"
+      id="name" name="name" [(ngModel)]="product.name" required>
+      
+    </div>
+  
+    <div class="form-group">
+      <label for="sellername">Seller Name:</label>
+      <input type="text" placeholder="Product Sellername"  class="form-control"
+       id="sellername" name="sellername" [(ngModel)]="product.sellername" required >
+      
+    </div>
+  
+    <div class="form-group">
+      <label for="price">Price:</label>
+      <input type="text" placeholder="Product price"  class="form-control"
+       id="price" name="price" [(ngModel)]="product.price" required>
+      
+    </div>
+  
+    <div class="form-group">
+      <label for="description">Description:</label>
+      <textarea placeholder="Product description"  class="form-control"
+       id="description" name="description" [(ngModel)]="product.description" required></textarea>
+     
+    </div>
+  
+    <div class="form-group">
+      <label for="productImage">Product Image:</label>
+      <input type="file" class="form-control"  (change)="processImage($event)" 
+       id="productImage" name="productImage" (change)="onFileSelected($event)" required>
+       
+    </div>
+
+   
+    
+    <div class="form-group">
+      <label for="category">Select Category:</label>
+      <select  id="category" name="category" class="form-control" [(ngModel)]="product.category" required>
+        <option value="">Select Category</option>
+        <option>ELECTRONICS</option>
+        <option>FASHION</option>
+        <option>SPORTS</option>
+      </select>
+      
+    </div>
+  
+    <button type="submit">Add Product</button>
+  </form>
+</div>
+</div>
+  

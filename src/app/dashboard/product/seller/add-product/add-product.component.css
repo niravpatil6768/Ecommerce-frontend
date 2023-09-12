@@ -5,7 +5,7 @@
     margin-bottom: 40px;
     margin-top: 30px;
     padding: 20px;
-    height: 550px;
+    height: 630px;
     background-color: #cbeaf8;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -53,9 +53,9 @@
     float: right;
   }
   
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 868px) {
     .course-form {
-      width: 90%;
+      width: 100%;
     }
   }
   
