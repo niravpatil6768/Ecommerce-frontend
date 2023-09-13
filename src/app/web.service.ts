@@ -27,11 +27,7 @@ export class WebService {
     },{observe: 'response'});
    }
 
-    //add product
-  /*public addProduct(name:string,sellername:string,price:number,description:string,productImage:string){
     
-    return this.http.post(`${this.ROOT_URL}/productpage/addproduct`,{name,sellername,price,description,productImage});
-  }*/
 
   public addProduct(formData: FormData): Observable<any> {
     return this.http.post(`${this.ROOT_URL}/productpage/addproduct`, formData);

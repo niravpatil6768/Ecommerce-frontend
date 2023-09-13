@@ -1,3 +1,9 @@
+<head>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</head>
 
 <div class="py-5 container">
     <div class="container1">
@@ -12,17 +18,22 @@
         [routerLink]="['add']">Add new product</button>
     </div>
 
-    <div class="container class">
+    <div class="container drop">
       <div class="row">
-        <div class="col-md-6 offset-md-3">
-          <label for="categorySelect">Select a Category:</label>
-          <select id="categorySelect" class="form-control" [(ngModel)]="selectedCategory" (change)="filterProductsByCategory()">
-            <option *ngFor="">All</option>
-            <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
-          </select>
-        </div>
+          <div class="col-md-6 offset-md-3">
+              <div class="custom-dropdown">
+                  <label for="categorySelect" class="dropdown-label">Select a Category:</label>
+                  <select id="categorySelect" class="form-control" [(ngModel)]="selectedCategory" (change)="filterProductsByCategory()">
+                     
+                      <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+                  </select>
+              </div>
+          </div>
       </div>
-    </div>
+  </div>
+    
+    
+    
     <div class="container2">
       <div class="row hidden-md-up">
         <div *ngIf="products.length === 0">No products found.</div>
@@ -40,6 +51,9 @@
               <p class="card-text"> Rs. {{product['price']}}</p>
               <button  class="btn btn-outline-success"
               (click)="addToCart(product['_id'])">Add to Cart</button>
+              <button  class="btn btn-outline-warning"
+              (click)="imageBox('http://localhost:3000/'+product.productImage,product['name'],product['description'] )">Click here!</button>
+              
             </div>
            
           </div>

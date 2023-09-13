@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 //import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
@@ -60,30 +61,28 @@ export class ProductListComponent implements OnInit {
 
   getAllProducts() {
     this.webService.products().subscribe((data: any) => {
-      this.products = data.products;
+      console.log(data.products[0].description)
+      this.products = data.products;    //show all products
       this.allProducts = data.products;
+      console.log("67>>>>>");
+      console.log(data.products)
+      console.log("69>>>>>");
+      console.log(this.allProducts);
     });
   }
 
- /* filterProductsByCategory(category: string) {
-    this.selectedCategory = category; // Update the selected category
-    if (category === '') {
-      // If no category is selected, display all products
-      this.products = this.allProducts;
-    } else {
-      // Filter products by the selected category
-      this.webService.productcategory(category).subscribe((data: any) => {
-        this.products = data.products;
-      });
-    }
-  }*/
+
 
   filterProductsByCategory() {
-    if (this.selectedCategory === '') {
-      this.products = this.allProducts;
+    if (this.selectedCategory === '' ) {
+      this.products = this.allProducts;  //give all products if category not selected
+      console.log("90>>>>>");
+      console.log(this.products)
     } else {
       this.webService.productcategory(this.selectedCategory).subscribe((data: any) => {
-        this.products = data.products;
+        this.products = data.products;  //show products of particular category
+        console.log("94>>>>>");
+        console.log(data);
       });
     }
   }
@@ -127,5 +126,16 @@ export class ProductListComponent implements OnInit {
     this.searchQuery = '';
     this.shouldFilter = false;
     this.products = this.allProducts;
+  }
+
+  imageBox(url : string,name: string,disc: string){
+    Swal.fire({
+      title: "Product:"+name,
+      text: "Product Detail:"+disc,
+      imageUrl: url,
+      imageWidth: 500,
+      imageHeight: 300,
+      imageAlt: 'Custom image',
+    })
   }
 }

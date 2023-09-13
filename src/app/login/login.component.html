@@ -1,122 +1,57 @@
-<!--<div class=" centered-content">
+<div class="body">
 
 
-    <div class="loginform" class="login-box">
-  
-      <div class="panel">
-        <h1 style="text-align: center; font-weight:bolder; font-size:xx-large; color: #0095ff; ">Login</h1>
-        <hr style="line-height: 25px;">
-        <p class="text-success" style="font-weight: bold;">Please enter your Email & Password</p>
+  <div class="Container">
+    <h1 class="title text-center">Login Page</h1>
+
+    <!-- Form Tag -->
+    <form [formGroup]="form" (ngSubmit)="signIn()">
+
+      <div *ngIf="errMessage" class="error-message">
+        {{ errMessage }}
       </div>
-  
-      <div>
-        <div class="form-group" style="padding-right: 0%;">
-          <div class="input-group-prepend" style="display: inline-flex;">
-            <span class="input-group-text" style=" margin-right: 10px; font-size: 25px; margin-bottom: 36px; color: #5eba7d; display: inline-block">
-              <i class="fa fa-user-circle-o" style="font-size: 25px;"></i>
-            </span>
-            <input type="email" class="box" #emailInput id="email" name="email"  placeholder="Enter Email" 
-              required>
-          </div>
-          
-  
+
+      <div class="form-group mb-3">
+        <label>Email address:</label>
+        <input type="email" formControlName="email" class="form-control" placeholder="Enter your email" required
+          [ngClass]="{ 'is-invalid': submitted && formControls['email'].errors }">
+        <div *ngIf="submitted && formControls['email'].errors" class="invalid-feedback">
+          <div *ngIf="formControls['email'].errors['required']">Email is required</div>
+          <div *ngIf="formControls['email'].errors['email']">Email is invalid</div>
         </div>
-  
-        
-  
-  
-  
-        <div class="form-group" style="padding-right: 0%;" >
-          <div class="input-group-prepend" style="display: inline-flex;">
-            <span class="input-group-text"  style="margin-right: 10px; font-size: 25px; margin-bottom: 37px;color: #0095ff;  display: inline-block">
-              <i class="fa fa-key" style="font-size: 25px;"></i>
-            </span>
-            <input type="password" class="box" #pwInput id="password" name="password" 
-              placeholder="Enter Password"  required>
-          </div>
-         
-        </div>
-  
-        
-  
-  
-        <br>
-        <button class="btn btn-outline-success" (click)="onLoginButtonClicked(emailInput.value,pwInput.value)"
-          style="width: 100%; margin-top: auto;">Login</button>
-  
-       
-  
       </div>
-  
-     
-      <h6  style="margin-left:80px; margin-top: 20px; ">Need an account? <a  style="color: #0095ff;" href="users/signup">Sign up now!</a></h6>
-  
-  
-      <br>
-  
-  
+
+      <div class="form-group mb-3">
+        <label>Password:</label>
+        <div class="password-input-container">
+          <input [type]="showPassword ? 'text' : 'password'" required placeholder="Enter your password"
+            formControlName="pass" id="pass" class="form-control" [(ngModel)]="password" name="pass">
+          <span class="password-toggle" (click)="togglePasswordVisibility()">
+            <i class="fa" [ngClass]="{ 'fa-eye': !showPassword, 'fa-eye-slash': showPassword }"></i>
+          </span>
+        </div>
+        <div *ngIf="submitted && formControls['pass'].errors" class="invalid-feedback">
+          <div *ngIf="formControls['pass'].errors['required']">Password is required</div>
+          <div *ngIf="formControls['pass'].errors['minlength']">Password must be at least 8 characters</div>
+          <div *ngIf="formControls['pass'].errors['maxlength']">Username must not exceed 20 characters</div>
+        </div>
+      </div>
+
+
+
+
+
+      <div class="text-center form-group btn-group">
+        <button type="submit" class="btn btn-success">Login</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <ngx-ui-loader fgsType="ball-spin-clockwise-fade-rotating" fgsColor="#2196f3"></ngx-ui-loader>
+        <button type="button" class="btn btn-secondary" (click)="onReset()">Reset</button>
+      </div>
+    </form>
+
+
+    <div class="loginLink">
+      <h6>Don’t have an account?</h6>
+      <h6 class="p-1 link"><a href="/register"> Sign up here</a></h6>
     </div>
-  
-  
-  </div>-->
-
-
-  <div class="body">
-    <!--<div class="text-center">
-      <img class="img-fluid" src="assets\linkcodelogo.png" alt="Image not found">
-    </div>-->
-    
-      <div class="Container">
-        <h1 class="title text-center">Login Page</h1>
-  
-        <!-- Form Tag -->
-        <form [formGroup]="form" (ngSubmit)="signIn()">
-  
-          <div *ngIf="errMessage" class="error-message">
-            {{ errMessage }}
-          </div>
-  
-          <div class="form-group mb-3">
-            <label>Email address:</label>
-            <input type="email" formControlName="email" class="form-control" placeholder="Enter your email" required
-            [ngClass]="{ 'is-invalid': submitted && formControls['email'].errors }">
-            <div *ngIf="submitted && formControls['email'].errors" class="invalid-feedback">
-              <div *ngIf="formControls['email'].errors['required']">Email is required</div>
-              <div *ngIf="formControls['email'].errors['email']">Email is invalid</div>
-            </div>
-          </div>
-  
-          <div class="form-group mb-3">
-            <label>Password:</label>
-            <div class="password-input-container">
-              <input [type]="showPassword ? 'text' : 'password'" required placeholder="Enter your password" formControlName="pass" id="pass" class="form-control"
-                [(ngModel)]="password" name="pass">
-              <span class="password-toggle" (click)="togglePasswordVisibility()">
-                <i class="fa" [ngClass]="{ 'fa-eye': !showPassword, 'fa-eye-slash': showPassword }"></i>
-              </span>
-            </div>
-            <div *ngIf="submitted && formControls['pass'].errors" class="invalid-feedback">
-              <div *ngIf="formControls['pass'].errors['required']">Password is required</div>
-              <div *ngIf="formControls['pass'].errors['minlength']">Password must be at least 8 characters</div>
-              <div *ngIf="formControls['pass'].errors['maxlength']">Username must not exceed 20 characters</div>
-            </div>
-          </div>
-  
-  
-          
-  
-  
-          <div class="text-center form-group btn-group">
-              <button type="submit" class="btn btn-success">Login</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <ngx-ui-loader fgsType="ball-spin-clockwise-fade-rotating" fgsColor="#2196f3"></ngx-ui-loader>
-              <button type="button" class="btn btn-secondary" (click)="onReset()">Reset</button>
-            </div>
-        </form>
-       
-  
-        <div class="loginLink">
-          <h6>Don’t have an account?</h6>
-          <h6 class="p-1 link"><a href="/register">  Sign up here</a></h6>
-        </div>
-      </div>
-    </div>
+  </div>
+</div>

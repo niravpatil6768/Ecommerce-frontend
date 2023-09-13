@@ -120,5 +120,24 @@
     
   }
 
+  .custom-dropdown {
+    background-color: #f8f9fa; /* Background color */
+    border: 1px solid #ced4da; /* Border color */
+    border-radius: 4px; /* Rounded corners */
+    padding: 5px 10px; /* Spacing inside the dropdown */
+    height: 80px
+}
+
+/* Style for the dropdown label */
+.dropdown-label {
+    font-weight: bold; /* Make the label bold */
+    height: 2px;
+}
+
+.drop{
+  margin-left: -140px;
+  width: 500px;
+}
+  
   
   
