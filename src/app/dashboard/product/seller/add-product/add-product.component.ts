@@ -41,9 +41,14 @@ export class AddProductComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private router: Router, private http: HttpClient, private webService: WebService) { }
 
 
+  
+  //used to assign first file selected by user to productImage property of product object
+  //takes one parameter any, here event related to file selection
   onFileSelected(event: any) {
+    //contains the list of files selected by the user
     const files: FileList = event.target.files;
     if (files.length > 0) {
+      //if file is selected then it assign it to productImage
       this.product.productImage = files[0];
     }
   }
@@ -65,19 +70,16 @@ export class AddProductComponent implements OnInit {
     return this.productForm.controls;
   }
 
-  /*addProduct() {
-
-    this.submitted = true;
-    if (this.productForm.invalid) {   
-      return;
-    }*/
+  
 
     addProduct() {
 
       
 
       if (this.product.productImage instanceof File && this.product.productImage.type === 'image/jpeg' ) {
+      //create formdata object  
       const formData = new FormData();
+      //append use to add key-value pair to form-data
       formData.append('name', this.product.name);
       formData.append('sellername', this.product.sellername);
       formData.append('price', this.product.price.toString());
@@ -139,18 +141,6 @@ export class AddProductComponent implements OnInit {
     this.router.navigate(['dashboard/product']);
   }
 
-  processImage(event: any) {
-    let files: FileList = event.target.files;
-    const { name, sellername, price, description } = this.productForm.value;
-    this.file = files[0];
-    this.isLoading = true;
-    this.http.post(environment.API + '/product/getUploadURL/' + this.file.name, { name, productImage: this.file.name, sellername, price, description }).subscribe((res: any) => {
-      this.url = res.url;
-      this.productId = res.product._id
-      this.isLoading = false;
-    }, (error) => {
-      this.isLoading = false;
-    })
-  }
+  
 
 }

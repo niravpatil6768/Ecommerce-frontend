@@ -8,15 +8,19 @@
 <div class="py-5 container">
     <div class="container1">
       <div class="search-container">
+        
         <input type="text" id="searchInput" placeholder="Search..." [(ngModel)]="searchQuery" (ngModelChange)="onSearch()" 
           #searchBox>
         <button type="button" id="searchButton" class="btn btn-primary" (click)="onSearch()">Search</button>
+        <!--if shouldfilter is true then and only this x button is visible for reset-->
         <button type="button" id="resetFilterButton" class="btn btn-secondary"  *ngIf="shouldFilter"
         (click)="resetFilter()">x</button>
       </div>
       <button id="add-button" type="button" class="btn btn-primary" *ngIf="getRole()=='SELLER'"
         [routerLink]="['add']">Add new product</button>
     </div>
+    
+   
 
     <div class="container drop">
       <div class="row">
@@ -37,6 +41,8 @@
     <div class="container2">
       <div class="row hidden-md-up">
         <div *ngIf="products.length === 0">No products found.</div>
+       
+        
         <div class="col-md-4" *ngFor="let product of products; let i = index">
           <div class="card shadow p-3 mb-5 bg-white rounded">
             <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">

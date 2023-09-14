@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { trigger, state, style, animate, transition } from '@angular/animations';
+
 import { Router } from '@angular/router';
 
 import { WebService } from 'src/app/web.service';
@@ -36,19 +36,11 @@ export class CartComponent implements OnInit {
     this.webService.getCart(this.userId).subscribe({next: (data:any) => {
           this.products = data.cart.products;
 
-        console.log(data);
-          this.products = this.products.map((product:any) => {
-            /*if (course.courseId.thumbnail) {
-              this.webService.getThumbnail(course.courseId._id, course.courseId.thumbnail).subscribe({
-                next: (data1) => {
-                  course.url = data1;
-                },
-                error(err) {
-                },
-              });
-            }*/
+        console.table(data);
+         this.products = this.products.map((product:any) => {
+           
             return product;
-            //return this.userId;
+            
           });
           this.total=data.cart.subTotal;
         },
