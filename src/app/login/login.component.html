@@ -23,7 +23,7 @@
 
       <div class="form-group mb-3">
         <label>Password:</label>
-        <input placeholder="Enter your password" [ngClass]="{ 'is-invalid': submitted && formControls['pass'].errors }"
+        <input placeholder="Enter your password" [type]="showPassword ? 'text' : 'password'" [ngClass]="{ 'is-invalid': submitted && formControls['pass'].errors }"
           formControlName="pass" id="pass" class="form-control" [(ngModel)]="password" name="pass">
         <div *ngIf="submitted && formControls['pass'].errors" class="invalid-feedback">
           <div *ngIf="formControls['pass'].errors['required']">Password is required</div>
