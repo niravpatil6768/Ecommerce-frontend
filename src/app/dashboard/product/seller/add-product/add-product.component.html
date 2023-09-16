@@ -1,7 +1,7 @@
 
 
 
-  <div class="add-course-container">
+ <!-- <div class="add-course-container">
     <h2>Add new Product</h2>
     <div class="course-form">
   <form (ngSubmit)="addProduct()"  enctype="multipart/form-data">
@@ -60,5 +60,68 @@
   
   </form>
 </div>
-</div>
+</div>-->
   
+
+<div class="add-course-container">
+  <h2>Add new Product</h2>
+  <div class="course-form">
+    <form  #productForm="ngForm" (ngSubmit)="addProduct()" enctype="multipart/form-data">
+
+      <div class="form-group">
+        <label for="name">Product Name:</label>
+        <input type="text" placeholder="Product name" class="form-control" id="name" name="name" [(ngModel)]="product.name" required
+        #nameInput="ngModel">
+        <!-- Display error message if the field is invalid -->
+        <div class="error-message" style="color: #dd2e2e; font-size: small;" *ngIf="nameInput.touched && !product.name">Product name is required.</div>
+      </div>
+
+      <div class="form-group">
+        <label for="sellername">Seller Name:</label>
+        <input type="text" placeholder="Product Sellername" class="form-control" id="sellername" name="sellername" [(ngModel)]="product.sellername" required #sellernameInput="ngModel">
+        <!-- Display error message if the field is invalid -->
+        <div class="error-message"  style="color: #dd2e2e; font-size: small;" *ngIf="sellernameInput.touched && !product.sellername">Seller name is required.</div>
+      </div>
+
+      <div class="form-group">
+        <label for="price">Price:</label>
+        <input type="text" placeholder="Product price" class="form-control" id="price" name="price" [(ngModel)]="product.price" required pattern="^\d+(\.\d{1,2})?$" #priceInput="ngModel">
+        <!-- Display error message if the field is invalid -->
+        <div class="error-message" style="color: #dd2e2e; font-size: small;" *ngIf="priceInput.touched && !product.price">Price is required.</div>
+        <div class="error-message" style="color: #dd2e2e; font-size: small;" *ngIf="priceInput.touched && !priceInput.valid">
+          Price is required and must be a valid number (up to 2 decimal places).
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="description">Description:</label>
+        <textarea placeholder="Product description" class="form-control" id="description" name="description" [(ngModel)]="product.description" required #descInput="ngModel"></textarea>
+        <!-- Display error message if the field is invalid -->
+        <div class="error-message" style="color: #dd2e2e; font-size: small;" *ngIf="descInput.touched && !product.description">Description is required.</div>
+      </div>
+
+      <div class="form-group">
+        <label for="productImage">Product Image:</label>
+        <input type="file" class="form-control" id="productImage" name="productImage" (change)="onFileSelected($event)" [(ngModel)]="product.productImage" required #imageInput="ngModel">
+        <!-- Display error message if the field is invalid -->
+        <div class="error-message" style="color: #dd2e2e; font-size: small;" *ngIf="imageInput.touched && !product.productImage">Product image is required.</div>
+      </div>
+
+      <div class="form-group">
+        <label for="category">Select Category:</label>
+        <select id="category" name="category" class="form-control" [(ngModel)]="product.category" required #categoryInput="ngModel">
+          <option value="">Select Category</option>
+          <option>ELECTRONICS</option>
+          <option>FASHION</option>
+          <option>SPORTS</option>
+        </select>
+        <!-- Display error message if the field is invalid -->
+        <div class="error-message"  style="color: #dd2e2e" *ngIf="categoryInput.touched && !product.category">Category is required.</div>
+      </div>
+
+      <button type="submit" >Add Product</button>
+      <button type="submit" style="margin-left: 7px;" routerLink="/dashboard/product">Back</button>
+
+    </form>
+  </div>
+</div>
