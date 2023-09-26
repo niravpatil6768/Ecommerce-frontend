@@ -86,7 +86,7 @@ export class CartComponent implements OnInit {
       console.log(this.products);
         const options = {
           
-          "key": environment.raz_key_id,
+          "key": 'rzp_test_3b88pgSESx20IL',
           "amount": this.total*100,
           
           "name": "shopBag website",
