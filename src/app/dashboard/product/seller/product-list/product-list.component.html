@@ -55,14 +55,15 @@
               <h5 class="card-title">{{product['name']}}</h5>
               <p class="card-text">Sellername : {{product['sellername']}}</p>
               <p class="card-text"> Rs. {{product['price']}}</p>
-              <button  class="btn btn-outline-success"
+              <button  class="btn btn-outline-success" *ngIf="getRole()=='BUYER'"
               (click)="addToCart(product['_id'])">Add to Cart</button>
               <button  class="btn btn-outline-warning"
-              (click)="imageBox('http://localhost:3000/'+product.productImage,product['name'],product['description'] )">Click here!</button>
-              <button  class="btn btn-outline-danger" style="width: 250px" *ngIf="getRole()=='SELLER'" 
-              (click)="deleteProduct(product['_id'])">Delete</button>
+              (click)="imageBox('http://localhost:3000/'+product.productImage,product['name'],product['description'] )" *ngIf="getRole()=='BUYER'">Click here!</button>
               <button style="width: 250px" *ngIf="getRole()=='SELLER'" 
               [routerLink]="product['_id'] + '/update'" class="btn btn-secondary">Update</button>
+              <button  class="btn btn-outline-danger" style="width: 250px" *ngIf="getRole()=='SELLER'" 
+              (click)="deleteProduct(product['_id'])">Delete</button>
+              
               
             </div>
            

@@ -31,7 +31,7 @@
       <li class="nav-item" *ngIf="getRole()=='SUPERADMIN'" style="margin-right: 40px;">
         <a href="/dashboard/user" class="nav-link nav-item "><i class="fa fa-users" style="align-items: center; margin-left: 23px;"></i><span class="row">View All User</span></a>
       </li>
-      <li class="nav-item" style="margin-right: 40px;">
+      <li class="nav-item" style="margin-right: 40px;" *ngIf="getRole()=='BUYER'">
         <a href="/dashboard/product/cart" class="nav-link nav-item"><i class="fa fa-shopping-bag" style="align-items: center; margin-left: -5px;"></i><span class="row">Carts</span></a>
       </li>
       <li class="nav-item" *ngIf="isLoggedIn()" style="margin-right: 15px;">
