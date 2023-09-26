@@ -1,11 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-
+import { trigger, state, style, animate, transition } from '@angular/animations';
 import { Router } from '@angular/router';
 
 import { WebService } from 'src/app/web.service';
 import { environment } from 'src/environments/environment';
 import { StorageService } from 'src/app/storage.service';
 
+declare var Razorpay:any;
+
+  
+
+ 
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
@@ -61,6 +66,78 @@ export class CartComponent implements OnInit {
         error: (err) => {
         }
       });
+  }
+
+
+  payNow() {
+    const amount = this.total;
+
+    this.webService.getCart(this.userId).subscribe(
+      {
+        next: (data:any) => {
+          this.products=data.cart.products;
+          console.log("response");
+      }});
+    
+
+    this.webService.createOrder(amount, this.products).subscribe((order) => {
+      console.log(order);
+      console.log(amount);
+      console.log(this.products);
+        const options = {
+          
+          "key": environment.raz_key_id,
+          "amount": this.total*100,
+          
+          "name": "shopBag website",
+          "description": "Web Development",
+        
+          "order_id": order.orderId,
+          handler: (response: any) => {
+            console.log(options);
+            var event = new CustomEvent("payment.success",
+              {
+                detail: response,
+                bubbles: true,
+                cancelable: true
+              },
+            );
+            window.dispatchEvent(event);
+            console.log(response);
+            const paymentId = response.razorpay_payment_id;
+            const orderId = response.razorpay_order_id;
+            const signature = response.razorpay_signature;
+            this.webService.verifyPayment(paymentId, orderId, signature).subscribe(
+              (response: any) => {
+                console.log("response 107");
+                response
+              },
+              (error: any) => {
+              }
+            )
+          },
+          "prefill": {
+            "name":"Nirav Patil",
+            "email": "patilnirav70@gmail.com",
+            "contact": "9265029853"
+          },
+          "theme": {
+            "color": "#3399cc"
+          }
+        };
+  
+        var rzp = new Razorpay(options);
+       //var rzp =  new (window as any).Razorpay(options);
+        rzp.open();
+
+        
+
+
+        rzp.on('payment.failed', function (response: any) {
+       });
+    }),
+  (error: any) => {
+  }
   }
 
 }

@@ -24,6 +24,7 @@ export class ProductListComponent implements OnInit {
   // modalRef!: BsModalRef;
   token: any;
   userId: any;
+  userRole: any;
   CurrentUser: any;
 
   filteredProducts: any[] = [];
@@ -37,6 +38,7 @@ export class ProductListComponent implements OnInit {
   categories: string[] = ['SPORTS', 'ELECTRONICS', 'FASHION'];
   ngOnInit(): void {
     this.token = this.storageService.getToken();
+    this.userRole = this.storageService.getRole();
     //get userId from token
     this.userId = JSON.parse(atob(this.token.split('.')[1]))._id
 
@@ -46,15 +48,31 @@ export class ProductListComponent implements OnInit {
   }
 
   getAllProducts() {
-    this.webService.products().subscribe((data: any) => {
-      console.log(data.products[0].description)
-      this.products = data.products;    //show all products
+
+    if(this.userRole === "BUYER" || this.userRole === "SUPERADMIN" ){
+      this.webService.products().subscribe((data: any) => {
+       // console.log(data.products[0].description)
+        this.products = data.products;    //show all products
+        this.allProducts = data.products;
+        console.log("userId:"+ this.userId) 
+        console.log("i am "+this.userRole);
+        console.log(data.products)
+        console.log("69....>>>>>");
+        console.log(this.allProducts);
+      });
+    }
+    if(this.userRole === "SELLER" ){
+    this.webService.productSeller(this.userId).subscribe((data: any) => {
+      //console.log(data.products[0].description)
+      this.products = data.products;
+      console.log("userId:"+ this.userId)    //show all products
       this.allProducts = data.products;
-      console.log("67>>>>>");
-      console.table(data.products)
+      console.log("i am "+this.userRole);
+      console.log(data.products)
       console.log("69>>>>>");
       console.log(this.allProducts);
     });
+  }
   }
 
 
@@ -78,6 +96,20 @@ export class ProductListComponent implements OnInit {
   public getRole() {
     return this.storageService.getRole();
   }
+
+  deleteProduct(productId: any): void {
+    //this.modalRef.hide();
+    this.webService.deleteProduct(productId).subscribe(
+      {
+        next: (data: any) => {
+          this.products = this.products.filter((course: { [x: string]: any; }) => course['_id'] != productId);
+        },
+        error: (err) => {
+        }
+      }
+    );
+  }
+
 
   //add in card using userId and productId
   public addToCart(productId: any) {

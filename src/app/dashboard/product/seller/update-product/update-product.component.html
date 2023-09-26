@@ -1,0 +1,85 @@
+<div class="update-course-container">
+    <h2>Update Product Details</h2>
+  <div [hidden]="isLoading" class="course-form">
+    <div class="update-course-form">
+    <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+  
+      <div class="form-group">
+        <label>Name</label>
+        <input
+          type="text"
+          placeholder="Product name"
+          formControlName="name"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && formControls['name'].errors }"
+        />
+      </div>
+  
+      <div class="form-group">
+        <label>Sellername</label>
+        <input
+          type="text"
+          placeholder="Sellername"
+          formControlName="sellername"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && formControls['sellername'].errors }"
+        />
+      </div>
+  
+    
+  
+      <div class="form-group">
+        <label>Price</label>
+        <input
+          type="text"
+          placeholder="Product price"
+          formControlName="price"
+          class="form-control"
+          pattern="^\d+(\.\d{1,2})?$"
+          [ngClass]="{ 'is-invalid': submitted && formControls['price'].errors }"
+        />
+        <div *ngIf="submitted && formControls['price'].hasError('pattern')" class="invalid-feedback">
+            Price must be a number.
+          </div>
+      </div>
+
+      <div class="form-group">
+        <label>Description</label>
+        <textarea
+          type="text"
+          placeholder="Product description"
+          formControlName="description"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && formControls['description'].errors }"
+        ></textarea>
+      </div>
+  
+      <!--<div class="form-group">
+        <label></label>
+        <input
+          type="file"
+          class="form-control"
+          formControlName="thumbnail"
+          (change)="processImage($event)"
+          [ngClass]="{ 'is-invalid': submitted && formControls['thumbnail'].errors }"
+        />
+      </div>-->
+
+      <div class="form-group">
+        <label for="category">Select Category:</label>
+        <select id="category" name="category" class="form-control" formControlName="category"  >
+          <option value="">Select Category</option>
+          <option>ELECTRONICS</option>
+          <option>FASHION</option>
+          <option>SPORTS</option>
+        </select>
+        
+      </div>
+  
+      <div class="form-group text-center">
+        <button type="submit" class="btn btn-primary">Update</button>
+        <button type="submit" class="btn btn-secondary" routerLink="/dashboard/product">Back</button>
+      </div>
+  
+    </form>
+  </div>

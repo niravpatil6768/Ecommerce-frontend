@@ -22,6 +22,7 @@ export class UserListComponent implements OnInit {
     
     { 'name': 'Email'},
     { 'name': 'User Type'},
+    { 'name': 'action'}
    
   ]
 

@@ -7,6 +7,7 @@ import { ProductComponent } from './product.component';
 import { AddProductComponent } from './seller/add-product/add-product.component';
 import { ProductListComponent } from './seller/product-list/product-list.component';
 import { CartComponent } from './buyer/cart/cart.component';
+import { UpdateProductComponent } from './seller/update-product/update-product.component';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { CartComponent } from './buyer/cart/cart.component';
     ProductComponent,
     AddProductComponent,
     ProductListComponent,
-    CartComponent
+    CartComponent,
+    UpdateProductComponent
   ],
   imports: [
     CommonModule,

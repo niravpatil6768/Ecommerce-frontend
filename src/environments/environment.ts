@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  API: 'http://localhost:3000'
+  API: 'http://localhost:3000',
+  raz_key_id : 'rzp_test_3b88pgSESx20IL'
 };
 
 /*

@@ -1,3 +1,31 @@
+<head>
+  <script>
+    var orderId ;
+$(document).ready(function(){
+    var settings = {
+  "url": "/create/orderId",
+  "method": "POST",
+  "timeout": 0,
+  "headers": {
+    "Content-Type": "application/json"
+  },
+  "data": JSON.stringify({
+    "amount": "50000"
+  }),
+};
+
+//creates new orderId everytime
+$.ajax(settings).done(function (response) {
+
+  orderId=response.orderId;
+  console.log(orderId);
+  $("button").show();
+});
+});
+  </script>
+  
+</head>
+
 <ngx-ui-loader fgsColor="#2980b9"></ngx-ui-loader>
 
 <div class="container-fluid my-5">
@@ -42,12 +70,13 @@
               <h5 class="mb-0">Rs. {{ total }}</h5>
             </div>
             <hr>
-            <button id ="paynow" type="button"  class="btn btn-info btn-block btn-lg">
+            <button id ="paynow" type="button" (click)="payNow()"  class="btn btn-info btn-block btn-lg">
               <div class="d-flex justify-content-between">
                 <span>{{ total }}</span>
                 <span>PAY NOW<i class="fas fa-long-arrow-alt-right ms-2"></i></span>
               </div>
             </button>
+            <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
           </div>
         </div>
       </div>

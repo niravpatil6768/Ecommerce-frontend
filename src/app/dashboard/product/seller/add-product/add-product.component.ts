@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormGroup, FormControl, FormBuilder, Validators, AbstractControl } from '@angular/forms';
+import { StorageService } from 'src/app/storage.service';
 import { NgForm } from '@angular/forms'; 
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
@@ -21,8 +22,12 @@ export class AddProductComponent implements OnInit {
     price: '',
     description: '',
     productImage: null, 
-    category: ''
+    category: '',
+    sellerId: '',
   };
+  token: any;
+  userId: any;
+  userRole: any;
 
   productForm: FormGroup = new FormGroup({
     name: new FormControl(''),
@@ -38,10 +43,10 @@ export class AddProductComponent implements OnInit {
   file: any;
   isLoading = false;
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private http: HttpClient, private webService: WebService) { }
+  constructor(private formBuilder: FormBuilder, private router: Router, private http: HttpClient, private webService: WebService, private storageService: StorageService) { }
 
 
-  
+ 
   //used to assign first file selected by user to productImage property of product object
   //takes one parameter any, here event related to file selection
   onFileSelected(event: any) {
@@ -64,6 +69,10 @@ export class AddProductComponent implements OnInit {
         category: ['', [Validators.required]]
       }
     )
+    this.token = this.storageService.getToken();
+    this.userRole = this.storageService.getRole();
+    //get userId from token
+    this.userId = JSON.parse(atob(this.token.split('.')[1]))._id
   }
 
   get formControls(): { [key: string]: AbstractControl } {
@@ -86,8 +95,9 @@ export class AddProductComponent implements OnInit {
       formData.append('description', this.product.description);
       formData.append('productImage', this.product.productImage as File);
       formData.append('category', this.product.category); 
+      formData.append('userId', this.userId);
   
-      this.webService.addProduct(formData).subscribe(
+      this.webService.addProduct(this.userId,formData).subscribe(
         (response) => {
           console.log('Product added successfully:', response);
           Swal.fire({
