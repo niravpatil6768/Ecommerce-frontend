@@ -81,13 +81,12 @@ export class CartComponent implements OnInit {
     
 
     this.webService.createOrder(amount, this.products).subscribe((order) => {
-      console.log(order);
-      console.log(amount);
-      console.log(this.products);
+     
+      
         const options = {
           
-          "key": 'rzp_test_3b88pgSESx20IL',
-          "amount": this.total*100,
+          "key_id": 'rzp_test_3b88pgSESx20IL',
+          "amount": this.total,
           
           "name": "shopBag website",
           "description": "Web Development",
@@ -109,8 +108,8 @@ export class CartComponent implements OnInit {
             const signature = response.razorpay_signature;
             this.webService.verifyPayment(paymentId, orderId, signature).subscribe(
               (response: any) => {
-                console.log("response 107");
-                response
+               
+                window.location.reload();
               },
               (error: any) => {
               }
