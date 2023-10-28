@@ -46,6 +46,8 @@ export class UpdateProductComponent implements OnInit {
       next: (data: any) => {
         this.product = data.product;
         console.log(data);
+
+        //prefilled form
         this.productForm = this.formBuilder.group({
           name: [this.product.name],
           sellername: [this.product.sellername],
@@ -58,6 +60,7 @@ export class UpdateProductComponent implements OnInit {
     });
   }
 
+  //getter to access form controls.
   get formControls(): { [key: string]: AbstractControl } {
     return this.productForm.controls;
   }

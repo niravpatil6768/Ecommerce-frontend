@@ -2,10 +2,10 @@ import { Component, ElementRef, OnInit, TemplateRef, ViewChild } from '@angular/
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
-//import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+
 
 import { StorageService } from 'src/app/storage.service';
-//import { UserService } from 'src/app/services/user.service';
+
 import { WebService } from 'src/app/web.service';
 
 @Component({
@@ -17,11 +17,10 @@ export class ProductListComponent implements OnInit {
   Product = {
     _id: "",
     name: "",
-    //thumbnail: "",
-    //url: ""
+   
   }
   products: any = [];
-  // modalRef!: BsModalRef;
+ 
   token: any;
   userId: any;
   userRole: any;
@@ -98,11 +97,11 @@ export class ProductListComponent implements OnInit {
   }
 
   deleteProduct(productId: any): void {
-    //this.modalRef.hide();
+    ;
     this.webService.deleteProduct(productId).subscribe(
       {
         next: (data: any) => {
-          this.products = this.products.filter((course: { [x: string]: any; }) => course['_id'] != productId);
+          this.products = this.products.filter((product: { [x: string]: any; }) => product['_id'] != productId);
         },
         error: (err) => {
         }

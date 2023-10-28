@@ -34,9 +34,12 @@ export class LoginComponent implements OnInit {
     private webService: WebService,
     private storageService: StorageService) { }
 
+  //called when component in intialized.  
   ngOnInit(): void {
     this.buildForm();
   }
+
+  //configure reactive form
   buildForm(): void {
     this.form = this.formBuilder.group(
       {
@@ -67,7 +70,7 @@ export class LoginComponent implements OnInit {
     }
 
 
-    const { email, pass } = this.form.value;
+    const { email, pass } = this.form.value; //destructuring 
     this.webService.login(email, pass).subscribe(
       {
         next: (data) => {
@@ -106,13 +109,5 @@ export class LoginComponent implements OnInit {
     this.showPassword = !this.showPassword;
   }
 
-  /*old*onLoginButtonClicked(email: string, password: string){
-    this.authService.login(email, password).subscribe((res: HttpResponse<any>) => {
-      if(res.status === 200){
-        this.router.navigate(['/dashboard']);
-      }
-      console.log(res);
-    });
-  }*/
-
+ 
 }

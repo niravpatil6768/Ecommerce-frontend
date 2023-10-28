@@ -75,6 +75,7 @@ export class AddProductComponent implements OnInit {
     this.userId = JSON.parse(atob(this.token.split('.')[1]))._id
   }
 
+  //getter to access formcontrol
   get formControls(): { [key: string]: AbstractControl } {
     return this.productForm.controls;
   }

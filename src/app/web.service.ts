@@ -14,6 +14,7 @@ export class WebService {
     this.ROOT_URL = environment.API;
    }
 
+   //return observable to handle http response
    signup(email: string,password: string,type: string): Observable<any>{
     return this.http.post(`${this.ROOT_URL}/user/register`,{
       email,
@@ -90,8 +91,8 @@ export class WebService {
   //payment
   public createOrder(amount: number, products : any) {
     const data = { amount, products};
-    return this.http.post(`${this.ROOT_URL}/payment/createPayment`, data).pipe(
-      map((response: any) => response)
+    return this.http.post(`${this.ROOT_URL}/payment/createPayment`, data).pipe(  //send data as a req. body
+      map((response: any) => response)  //to map http response. and return the response
     );
   }
 

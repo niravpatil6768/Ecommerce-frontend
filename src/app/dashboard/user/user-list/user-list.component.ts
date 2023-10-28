@@ -45,12 +45,9 @@ export class UserListComponent implements OnInit {
   
   }
 
-  /*openModal(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
-  }*/
-
+  
   deleteUser(userId:any): void {
-   // this.modalRef.hide();
+   
    
     this.webService.deleteUser(userId).subscribe(
       {

@@ -52,7 +52,7 @@ export class SignupComponent implements OnInit {
   }
 
   get formControl(): { [key: string]: AbstractControl } {
-    return this.form.controls;    //to access form control with name
+    return this.form.controls;    //to access form control 
   }
 
   onSubmit(): void {
@@ -65,10 +65,10 @@ export class SignupComponent implements OnInit {
     //destructure values from the form.
     const {  email, password, role } = this.form.value;
 
-
+    //passing values like email,password etc.
     this.webService.signup( email, password, role).subscribe(
       {
-        next: (data) => {
+        next: (data) => { //callback if http req. successfull
 
           //to show poppup if singedup user
           const Toast = Swal.mixin({
@@ -115,10 +115,6 @@ export class SignupComponent implements OnInit {
     this.showPasswordtwo = !this.showPasswordtwo;
   }
 
-/*old*  onSignupButtonClicked(email: string, password: string){
-    this.authService.signup(email,password).subscribe((res : HttpResponse<any>) => {
-      console.log(res);
-    })
-  }*/
+
 
 }

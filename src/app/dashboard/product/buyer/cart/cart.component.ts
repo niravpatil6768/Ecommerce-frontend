@@ -42,6 +42,7 @@ export class CartComponent implements OnInit {
           this.products = data.cart.products;
 
         console.table(data);
+        //map the response
          this.products = this.products.map((product:any) => {
            
             return product;
@@ -60,6 +61,7 @@ export class CartComponent implements OnInit {
     this.webService.removeItem(productId,this.userId).subscribe(
       {
         next: (data:any) => {
+          //filter cart according to productId
           this.products=this.products.filter((product:any)=>product['productId']!=productId);
           this.getProducts();
         },
