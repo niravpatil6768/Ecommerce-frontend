@@ -1,6 +1,6 @@
 
 
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -21,7 +21,7 @@
 	<button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
 		<span class="navbar-toggler-icon"></span>
 	</button>
-	<!-- Collection of nav links, forms, and other content for toggling -->
+	
 	<div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">		
 		
 		<div class="navbar-nav ml-auto">
@@ -41,4 +41,106 @@
 	</div>
 </nav>
 </body>
-</html>
+</html>-->
+
+<!--<nav class="navbar navbar-expand-lg navbar-dark gradient-custom">
+ 
+  <div class="container-fluid">
+   
+    <a class="navbar-brand" href="#">Navbar</a>
+
+    
+    <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
+      data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+      aria-label="Toggle navigation">
+      <i class="fa fa-bars text-light"></i>
+    </button>
+
+    
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      
+      <ul class="navbar-nav me-auto d-flex flex-row mt-3 mt-lg-0">
+        <li class="nav-item text-center mx-2 mx-lg-1">
+          <a class="nav-link " aria-current="page" href="dashboard/product">
+            <div>
+              <i class="fa fa-home fa-lg mb-1"></i>
+            </div>
+            Home
+          </a>
+        </li>
+        <li *ngIf="getRole()=='SUPERADMIN'" class="nav-item text-center mx-2 mx-lg-1">
+          <a class="nav-link" href="dashboard/users">
+            <div>
+              <i class="fa fa-users fa-lg mb-1"></i>
+              
+            </div>
+            View All User
+          </a>
+        </li>
+        <li *ngIf="getRole()=='BUYER'" class="nav-item text-center mx-2 mx-lg-1">
+          <a class="nav-link" href="/dashboard/product/cart">
+            <div>
+              <i class="fa fa-shopping-bag fa-lg mb-1"></i>
+              
+            </div>
+          Carts
+          </a>
+        </li>
+        <li *ngIf="isLoggedIn()" class="nav-item text-center mx-2 mx-lg-1">
+          <a (click)="logout()" class="nav-link" href="/login">
+            <div>
+              <i class="fa fa-sign-out fa-lg mb-1"></i>
+              
+            </div>
+            Logout
+          </a>
+        </li>
+      </ul>
+      
+
+      
+      <ul class="navbar-nav ms-auto d-flex flex-row mt-3 mt-lg-0">
+        <li class="nav-item text-center mx-2 mx-lg-1">
+          <a class="nav-link" href="#!">
+            <div>
+              <i class="fa fa-bell fa-lg mb-1"></i>
+              <span class="badge rounded-pill badge-notification bg-dark">11</span>
+            </div>
+            Messages
+          </a>
+        </li>
+        <li class="nav-item text-center mx-2 mx-lg-1">
+          <a class="nav-link" href="#!">
+            <div>
+              <i class="fa fa-globe-americas fa-lg mb-1"></i>
+              <span class="badge rounded-pill badge-notification bg-dark">11</span>
+            </div>
+            News
+          </a>
+        </li>
+      </ul>
+      
+     
+    </div>
+    
+  </div>
+ 
+</nav>-->
+
+
+<div class="vh-100  align-items-center position-fixed start-0 top-0" style="height: 10rem; " role="navigation">
+  <div class="p-2">
+    <div id="mainNav">
+      <ul class="list-unstyled rounded ms-2">
+        <li><a class="vlink vlinkk rounded border-0" style="flex-direction: column;" href="dashboard/product"><i class="fa fa-truck icon"></i><h6>shopBag</h6></a></li>
+        <li><a class="vlink rounded border-0" href="dashboard/product"><i class="fa fa-home"></i> <span>Home</span></a></li>
+        <li *ngIf="getRole()=='SELLER'"><a class="vlink rounded border-0" href="dashboard/product/add"><i class="fa fa-plus-square"></i> <span>Add Product</span></a></li>
+        <li *ngIf="getRole()=='SUPERADMIN'"><a class="vlink rounded" href="/dashboard/user"><i class="fa fa-users"></i> <span>Users</span></a></li>
+        <li *ngIf="getRole()=='BUYER'"><a class="vlink rounded" href="dashboard/product/cart"><i class="fa fa-shopping-bag"></i> <span>Carts</span></a></li>
+        <li *ngIf="isLoggedIn()"><a (click)="logout()" class="vlink rounded" href="/login"><i class="fa fa-sign-out"></i> <span>Logout</span></a></li>
+       
+      </ul>
+    </div>
+  </div>
+</div>
+

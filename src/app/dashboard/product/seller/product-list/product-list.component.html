@@ -7,34 +7,43 @@
 
 <div class="py-5 container">
     <div class="container1">
-      <div class="search-container">
-        
-        <input type="text" id="searchInput" placeholder="Search..." [(ngModel)]="searchQuery" (ngModelChange)="onSearch()" 
-          #searchBox>
-        <button type="button" id="searchButton" class="btn btn-primary" (click)="onSearch()">Search</button>
-        <!--if shouldfilter is true then and only this x button is visible for reset-->
-        <button type="button" id="resetFilterButton" class="btn btn-secondary"  *ngIf="shouldFilter"
-        (click)="resetFilter()">x</button>
-      </div>
-      <button id="add-button" type="button" class="btn btn-primary" *ngIf="getRole()=='SELLER'"
-        [routerLink]="['add']">Add new product</button>
-    </div>
-    
-   
 
-    <div class="container drop">
-      <div class="row">
-          <div class="col-md-6 offset-md-3">
-              <div class="custom-dropdown">
-                  <label for="categorySelect" class="dropdown-label">Select a Category:</label>
-                  <select id="categorySelect" class="form-control" [(ngModel)]="selectedCategory" (change)="filterProductsByCategory()">
-                     
-                      <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
-                  </select>
-              </div>
+      
+      <div class="container">
+        <div class="row">
+          <!-- Search Container -->
+          <div class="col-md-7">
+            <div class="search-container col">
+        
+              <input type="text" style="border-color: #ee7724; border-radius: 1rem;" class="searchbar" id="searchInput" placeholder="Search..." [(ngModel)]="searchQuery" (ngModelChange)="onSearch()" 
+                #searchBox>
+              <button style=" border-radius: 0.5rem;" type="button" id="searchButton" class="btn search" (click)="onSearch()"><i class="fa fa-search"></i></button>
+              <!--if shouldfilter is true then and only this x button is visible for reset-->
+              <button type="button" id="resetFilterButton" class="btn" style="color: rgb(140, 8, 8); background-color: rgba(0, 0, 0, 0.482); border-radius: 0.5rem;"  *ngIf="shouldFilter"
+              (click)="resetFilter()"><i class="fa fa-times"></i></button>
+            </div>
           </div>
+      
+          <!-- Dropdown Container -->
+          <div class="col-md-2" style="margin-top: -1.6rem;">
+            <div class="">
+              <label for="categorySelect" style="margin-right: 10rem;" class="dropdown-label">SortBy:</label>
+              <div class="input-group">
+                <div class="input-group-append" style="border-radius: 0.5rem;">
+                  <label for="categorySelect" style="border-radius: 0.4rem;" class="input-group-text"><i class="fa fa-sort-amount-desc"></i></label>
+                </div>  
+                <select  id="categorySelect" class="" [(ngModel)]="selectedCategory" (change)="filterProductsByCategory()" style="width: 5rem; border-radius: 0.4rem;">
+                  
+                  <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+                </select>
+               
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-  </div>
+      
+    
     
     
     

@@ -29,4 +29,15 @@ export class NavComponent implements OnInit {
     console.log("clear")
   }
 
+  isSidebarActive = false;
+
+  toggleSidebar() {
+    this.isSidebarActive = !this.isSidebarActive;
+  }
+
+  closeSidebar() {
+    this.isSidebarActive = false;
+  }
+
+
 }

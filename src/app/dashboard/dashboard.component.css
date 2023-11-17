@@ -1,0 +1,16 @@
+.wrapper {
+    position: relative;
+  }
+  
+  .nav-container {
+    position: fixed;
+    z-index: 1000;
+    margin-top: 2rem; /* Ensure the navigation is above other elements */
+    /* Add other styling for your navigation, such as width, height, background color, etc. */
+  }
+  
+  .content-container {
+    /* Adjust the margin or padding to make space for the navigation */
+    margin-left: 5rem /* Set the width of your navigation */
+  }
+  
