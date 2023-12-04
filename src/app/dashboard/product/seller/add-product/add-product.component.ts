@@ -86,7 +86,7 @@ export class AddProductComponent implements OnInit {
 
       
 
-      if (this.product.productImage instanceof File && this.product.productImage.type === 'image/jpeg' ) {
+      if (this.product.productImage instanceof File && this.product.productImage.type === 'image/png' ) {
       //create formdata object  
       const formData = new FormData();
       //append use to add key-value pair to form-data
